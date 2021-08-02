@@ -1,11 +1,11 @@
 const express = require("express");
-// require("./server/db/mongoose");
+require("./server/db/mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const path = require("path");
 require('dotenv').config()
-// const PagesRoutes = require("./server/routes/pagesRoutes")
+const PagesRoutes = require("./server/routes/pagesRoutes")
 
 
 const port = 8000;
@@ -19,8 +19,8 @@ app.use(express.json());
 //   res.status(503).send("service is currently unavailable we'll be back shortly")
 // })
 
-// app.use("/",PagesRoutes);
-// app.use("/events", eventsRoute);
+app.use("/",PagesRoutes);
+
 
 if (process.env.NODE_ENV === "production") {
   // Exprees will serve up production assets
