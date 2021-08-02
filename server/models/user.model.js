@@ -9,19 +9,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  neighbourhood:{
+  latitude: {
+    type: Number,
+    required: true,
+  },
+  longitude: {
+    type: Number,
+    required: true,
+  },
+  locationID:{
     type:String,
-  },
-  latitude:{
-    type:Number,
-    required:true,
-  },
-  longitude:{
-    type:Number,
-    required:true,
+    required:true
   }
 });
-
 
 const UserModel = mongoose.model("user", userSchema);
 

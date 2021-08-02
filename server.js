@@ -4,9 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-require('dotenv').config()
-const PagesRoutes = require("./server/routes/pagesRoutes")
-
+require("dotenv").config();
+const PagesRoutes = require("./server/routes/pagesRoutes");
 
 const port = 8000;
 
@@ -14,13 +13,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-
 // app.use((req,res,next)=>{
 //   res.status(503).send("service is currently unavailable we'll be back shortly")
 // })
 
-app.use("/",PagesRoutes);
-
+app.use("/", PagesRoutes);
 
 if (process.env.NODE_ENV === "production") {
   // Exprees will serve up production assets
