@@ -21,3 +21,5 @@ export interface PeopleInProximityInterFace{
          longitude:Number;
          userName:String;
 }
+
+export interface Geolocation {latitude?:number,longitude?:number}
