@@ -1,18 +1,19 @@
 const express = require("express");
-require("./server/db/mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-require("dotenv").config();
 const PagesRoutes = require("./server/routes/pagesRoutes");
+
+require("dotenv").config();
+require("./server/db/mongoose");
 
 const port = 8000;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
-
+// TODO change to the name
 app.use("/query", PagesRoutes);
 
 if (process.env.NODE_ENV === "production") {

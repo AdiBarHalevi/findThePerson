@@ -8,21 +8,10 @@ const axiosInstance = axios.create({
         : `http://localhost:8000/`,
   });
 
-export const directQueryTest = async(adress:string)=>{
-    try{
-        const url = `/query/findPeopleNearMe/${adress}`
-        const ans = await axiosInstance.get(url)
-        return ans.data
-
-    }catch(e){
-        return []
-    }
-
-}
 
 export const queryForPeopleInProximity = async (latitude:string,longitude:string)=>{
     try{
-        const url = `/query/findPeopleByGeoLocation/${longitude}/${latitude}`
+        const url = `/query/find-people-by-geo-location/${longitude}/${latitude}`
         const ans = await axiosInstance.get(url)
         return ans.data
 
@@ -30,19 +19,6 @@ export const queryForPeopleInProximity = async (latitude:string,longitude:string
         return []
     }
 }
-
-// export const fetchQueryingUserGeoLocation = async (queryingAddress:string)=>{
-//     const url = `http://api.positionstack.com/v1/forward?access_key=${ApiKey}&query=${queryingAddress}&region=London&limit=1&country =UK`
-//     try{
-//         const ans = await axios.get(url) as any
-//         const latitude = ans.data.data[0].latitude
-//         const longitude= ans.data.data[0].longitude
-//         return {latitude,longitude}
-
-//     }catch(e){
-//         return []
-//     }
-// }
 
 export const fetchQueryingUserGeoLocation = async (queryingAddress:string)=>{
     const url = `https://us1.locationiq.com/v1/search.php?key=${ApiKey}&q=${queryingAddress}&bounded=1&limit=1&countrycodes=GB&namedetails=1&format=json

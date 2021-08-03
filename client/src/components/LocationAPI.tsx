@@ -48,7 +48,7 @@ const LocationAPI =()=>{
           const coordinatesObj = await fetchQueryingUserGeoLocation(queryingAddress) as any
            setQueryingCoardinates(coordinatesObj)
        }
-         if(queryingAddress.length>0){
+         if(queryingAddress.length){
             getCoordinates()
         }
     },[queryingAddress])

@@ -10,6 +10,7 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 client.connect((err) => {
   client.db("POI-task").collection("users");
 
