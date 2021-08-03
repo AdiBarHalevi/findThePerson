@@ -20,7 +20,7 @@ const SearchBar = ({setQueryingCoardinates}:{setQueryingCoardinates:Function})=>
                 <input type="number" value={lng} onChange={(e:any)=>setLng(e.target.value)} required/>
             </FlexBox>
             <FlexBox>
-                <label>Longtitude</label>
+                <label>longitude</label>
                 <Input width="40px" type="number" value={lat} onChange={(e:any)=>setLat(e.target.value)} required/>
             </FlexBox>
             <Submit type="submit"/>

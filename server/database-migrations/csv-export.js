@@ -34,12 +34,12 @@ const turnToDataArr = (content) => {
   }
   return dataArr;
 };
-const saveModel = async (locationID,longtitude,latitude,address,userName)=>{
+const saveModel = async (locationID,longitude,latitude,address,userName)=>{
   return await  new UserDBModel({
     location:{
       geometry :{
         type: "Point",
-        coordinates:[longtitude,latitude]
+        coordinates:[longitude,latitude]
       },
       properties:{
         userName,
@@ -87,9 +87,9 @@ const exportCSVToDB = async (fileName) => {
       const locationID = locationIDAns.data.candidates[0].place_id;
       const LocationData = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${locationID}&key=${googleApiKey}`)
       const {result} = LocationData.data
-      const longtitude = result.geometry.location.lng
+      const longitude = result.geometry.location.lng
       const latitude = result.geometry.location.lat
-      const user = await saveModel(locationID,longtitude,latitude,address,userName)
+      const user = await saveModel(locationID,longitude,latitude,address,userName)
       await user.save()
       }
 
