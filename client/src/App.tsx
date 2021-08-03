@@ -1,13 +1,12 @@
 import styled, { createGlobalStyle } from "styled-components";
 import LocationAPI from "./components/LocationAPI";
 
-
 function App() {
   return (
     <>
-    <GlobalStyle/>
+      <GlobalStyle />
       <WelcomeContainer>
-        <LocationAPI/>
+        <LocationAPI />
       </WelcomeContainer>
     </>
   );
@@ -15,14 +14,10 @@ function App() {
 
 export default App;
 
-
 const WelcomeContainer = styled.div`
-  height:100vh;
-  display:flex;
-  
-`
-
-
+  height: 100vh;
+  display: flex;
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {
