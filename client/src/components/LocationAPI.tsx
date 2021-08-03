@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { fetchQueryingUserGeoLocation, queryForPeopleInProximity } from "../globals/axiosCalls"
-import { PeopleInProximityInterFace } from "../Types"
-import Map from "./Map"
+import { Geolocation, PeopleInProximityInterFace } from "../Types"
+import Map from "./mapComponents/Map"
 import SideBar from "./SideBar"
 
 
@@ -19,8 +19,7 @@ const parseProximityData = (peopleArr:any)=>{
 const LocationAPI =()=>{
     const [queryingAddress,setQueryingAddress] = useState('')
     const [peopleInProximity,setPeopleInProximity] = useState<Array<PeopleInProximityInterFace>|[]>([])
-    const [queryingCooardinates,setQueryingCoardinates] = useState<{latitude:number|null,longitude:number|null}>({latitude:null,longitude:null})
-
+    const [queryingCooardinates,setQueryingCoardinates] = useState<Geolocation>({})
  
     
     useEffect(()=>{
@@ -64,6 +63,7 @@ const LocationAPI =()=>{
         />
         <Map
          peopleInProximity={peopleInProximity}
+         queryingCooardinates={queryingCooardinates}
          />
     </>
     )
