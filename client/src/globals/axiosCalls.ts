@@ -10,10 +10,11 @@ const axiosInstance = axios.create({
 
 export const queryForPeopleInProximity = async (
   latitude: string,
-  longitude: string
+  longitude: string,
+  amountOfUsers:Number,
 ) => {
   try {
-    const url = `/query/find-people-by-geo-location/${longitude}/${latitude}`;
+    const url = `/query/find-people-by-geo-location/${longitude}/${latitude}/${amountOfUsers}`;
     const ans = await axiosInstance.get(url);
     return ans.data;
   } catch (e) {

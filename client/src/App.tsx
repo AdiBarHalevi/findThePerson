@@ -15,13 +15,15 @@ function App() {
 export default App;
 
 const WelcomeContainer = styled.div`
-  height: 100vh;
+  height:100vh;
+  width:100vw;
   display: flex;
+  align-items:center;
 `;
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    font-family: "Yomogi", cursive, Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 `;

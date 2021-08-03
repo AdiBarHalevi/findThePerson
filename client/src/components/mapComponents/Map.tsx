@@ -20,7 +20,7 @@ const Map = ({
   return (
     <MapPageContainer id="mapid">
       <MapContainer
-        style={{ height: "100%", width: "90vw" }}
+        style={{ height: "100%", width: "100%" }}
         center={[51.5074, -0.078]}
         zoom={13}
         scrollWheelZoom={false}
@@ -72,7 +72,7 @@ const Map = ({
 export default Map;
 
 const MapPageContainer = styled.div`
-  width: 75vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
 `;

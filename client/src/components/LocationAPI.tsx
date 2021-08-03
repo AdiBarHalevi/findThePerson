@@ -28,13 +28,14 @@ const LocationAPI = () => {
   const [peopleInProximity, setPeopleInProximity] = useState<
     Array<PeopleInProximityInterFace> | []
   >([]);
+  const [amountOfUsers,setAmountOfUsers]=useState(0)
   const [queryingCooardinates, setQueryingCoardinates] = useState<Geolocation>(
     {}
   );
 
   useEffect(() => {
-    const compareWithGeoLocation = async (lat: string, lng: string) => {
-      let peopleArr = await queryForPeopleInProximity(lat, lng);
+    const compareWithGeoLocation = async (lat: string, lng: string,amountOfUsers:Number) => {
+      let peopleArr = await queryForPeopleInProximity(lat, lng,amountOfUsers);
       if (peopleArr.length > 0) {
         peopleArr = parseProximityData(peopleArr);
         setPeopleInProximity(peopleArr);
@@ -44,9 +45,9 @@ const LocationAPI = () => {
     if (latitude && longitude) {
       let lat = latitude.toString();
       let lng = longitude.toString();
-      compareWithGeoLocation(lat, lng);
+      compareWithGeoLocation(lat, lng,amountOfUsers);
     }
-  }, [queryingCooardinates]);
+  }, [queryingCooardinates,amountOfUsers]);
 
   useEffect(() => {
     fetchQueryingUserGeoLocation(queryingAddress);
@@ -67,6 +68,7 @@ const LocationAPI = () => {
         peopleInProximity={peopleInProximity}
         queryingAddress={queryingAddress}
         setQueryingAddress={setQueryingAddress}
+        setAmountOfUsers={setAmountOfUsers}
       />
       <Map
         peopleInProximity={peopleInProximity}

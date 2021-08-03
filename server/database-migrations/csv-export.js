@@ -42,17 +42,17 @@ const turnToDataArr = (content) => {
   for (let value of content) {
     const location = value.indexOf(",");
     const name = value.substring(0, location).trim();
-    let adress = value.substring(location + 1, value.length).trim();
-    if (adress[0] === `"`) adress = adress.substring(1, adress.length);
+    let address = value.substring(location + 1, value.length).trim();
+    if (address[0] === `"`) address = address.substring(1, address.length);
 
-    if (adress[adress.length - 1] === `"`)
-      adress = adress.substring(0, adress.length - 1);
+    if (address[address.length - 1] === `"`)
+      address = address.substring(0, address.length - 1);
 
-    if (adress.substring(adress.length - 6, adress.length) === "London") {
-      adress = adress.substring(0, adress.length - 7);
+    if (address.substring(address.length - 6, address.length) === "London") {
+      address = address.substring(0, address.length - 7);
     }
 
-    dataArr.push([name, adress]);
+    dataArr.push([name, address]);
   }
   return dataArr;
 };
