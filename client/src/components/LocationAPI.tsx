@@ -1,7 +1,6 @@
-import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
-import { directQueryTest, fetchQueryingUserGeoLocation, queryForPeopleInProximity } from "../globals/axiosCalls"
+import { fetchQueryingUserGeoLocation, queryForPeopleInProximity } from "../globals/axiosCalls"
 import { PeopleInProximityInterFace } from "../Types"
 import Map from "./Map"
 import SideBar from "./SideBar"
@@ -26,66 +25,42 @@ const LocationAPI =()=>{
     
     useEffect(()=>{
         const compareWithGeoLocation = async(lat:string,lng:string)=>{
-            //@ts-ignore
             let peopleArr = await queryForPeopleInProximity(lat,lng);
             if(peopleArr.length>0){
                 peopleArr = parseProximityData(peopleArr)
                 setPeopleInProximity(peopleArr)
 
             }
-            console.log(peopleArr)
-
 
         }
         const {latitude,longitude} = queryingCooardinates
        if(latitude&&longitude){
-        let lat = `${latitude}`
-        let lng = `${longitude}`
+        let lat = latitude.toString()
+        let lng = longitude.toString()
         compareWithGeoLocation(lat,lng)
 
        }
     },[queryingCooardinates])
 
+    useEffect(()=>{
+        fetchQueryingUserGeoLocation(queryingAddress)
+        const getCoordinates = async ()=>{
+          const coordinatesObj = await fetchQueryingUserGeoLocation(queryingAddress) as any
+           setQueryingCoardinates(coordinatesObj)
+       }
+         if(queryingAddress.length>0){
+            getCoordinates()
+        }
+    },[queryingAddress])
 
-    // useEffect(()=>{
-    //     const testForHeroku =async()=>{
-    //         let peopleArr = await directQueryTest(queryingAddress)
-    //         if(peopleArr.length) {
-    //             peopleArr = parseProximityData(peopleArr)
-    //             setPeopleInProximity(peopleArr)
-    //         }
-    //     }
-    //     testForHeroku()
-    //     // const getCoordinates = async ()=>{
-    //     //     const coordinatesObj = await fetchQueryingUserGeoLocation(queryingAddress) as any
-    //     //     setQueryingCoardinates(coordinatesObj)
-    //     // }
-    //     // if(queryingAddress.length>0){
-    //     //    getCoordinates()
-    //     // }
-    // },[queryingAddress])
-
-    // useEffect(()=>{
-    //     const fecthPeopleInProximity = async (queryingCooardinates:{latitude:number|null,longitude:number|null})=>{
-    //         const {longitude,latitude} = queryingCooardinates
-    //         let peopleArr = await queryForPeopleInProximity(longitude,latitude) as any
-    //         if(peopleArr.length) {
-    //             peopleArr = parseProximityData(peopleArr)
-    //             setPeopleInProximity(peopleArr)}
-    //     }
-    //     if(queryingCooardinates.longitude&&queryingCooardinates.latitude){
-    //         fecthPeopleInProximity(queryingCooardinates)
-    //     }
-    // },[queryingCooardinates])
-
-    
+ 
 
     return (
     <>
         <SideBar 
         peopleInProximity={peopleInProximity}
-        setQueryingCoardinates={setQueryingCoardinates}
-        queryingCooardinates={queryingCooardinates}
+        queryingAddress={queryingAddress}
+        setQueryingAddress={setQueryingAddress}
         />
         <Map
          peopleInProximity={peopleInProximity}

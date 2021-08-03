@@ -2,26 +2,26 @@ import { useState } from "react"
 import styled from "styled-components"
 
 
-const SearchBar = ({setQueryingCoardinates}:{setQueryingCoardinates:Function})=>{
-    const [lng, setLng] = useState(0)
-    const [lat, setLat] = useState(0)
+const ProvideAdress = ({setQueryingAddress}:{setQueryingAddress:Function})=>{
+    const [address, setAddress] = useState('')
+    const [StreetNumber, setStreetNumber] = useState(0)
 
     const handleSubmit=(event:React.FormEvent)=>{
         event.preventDefault()
-
-        setQueryingCoardinates({latitude:lng,longitude:lat})
+        const queryingAdress = `${address},${StreetNumber} London,UK`
+        setQueryingAddress(queryingAdress)
     }
 
     return( 
     <MapContainer>
         <Form onSubmit={handleSubmit}>
             <FlexBox >
-                <label>Altitude</label>
-                <input type="number" value={lng} onChange={(e:any)=>setLng(e.target.value)} required/>
+                <label>street Name</label>
+                <input type="text" value={address} onChange={(e:any)=>setAddress(e.target.value)} required/>
             </FlexBox>
             <FlexBox>
-                <label>Longtitude</label>
-                <Input width="40px" type="number" value={lat} onChange={(e:any)=>setLat(e.target.value)} required/>
+                <label>street number</label>
+                <Input width="40px" type="number" value={StreetNumber} onChange={(e:any)=>setStreetNumber(e.target.value)} required/>
             </FlexBox>
             <Submit type="submit"/>
         </Form>
@@ -29,7 +29,7 @@ const SearchBar = ({setQueryingCoardinates}:{setQueryingCoardinates:Function})=>
     )
 }
 
-export default SearchBar
+export default ProvideAdress
 
 const MapContainer = styled.div`
   width:25vw;

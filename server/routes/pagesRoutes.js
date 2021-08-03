@@ -5,7 +5,8 @@ const apiController = require("../controllers/api.controller");
 const populateAPIcontroller = require("../controllers/populateAPI.controllers")
 
 router
-  // TODO KEEP THIS?
+
+  // TODO KEEP THIS? WORKS ONLY ON DEV
   .get("/findPeopleNearMe/:location", async (req, res) => {
     try {
       const location = req.params.location
@@ -25,6 +26,7 @@ router
       res.status(400).send("failed to complete the query");
     }
   })
+  // WORKS ONLY ON DEV - restricted access to db credentials
   .post("/populateDB", async (req, res) => {
     try {
       const ans = await populateAPIcontroller.populateDB()

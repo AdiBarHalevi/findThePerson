@@ -1,18 +1,22 @@
-import { useState } from "react"
 import styled from "styled-components"
 import { PeopleInProximityInterFace } from "../Types"
-import SearchBar from "./SearchBar"
+import ProvideAdress from "./ProvideAdress"
 import UsersDisplay from "./UsersDisplay"
 
        
-const SideBar = ({peopleInProximity,setQueryingCoardinates,queryingCooardinates}:
-    {peopleInProximity:Array<PeopleInProximityInterFace>;setQueryingCoardinates:Function;queryingCooardinates:{latitude:number|null,longitude:number|null}})=>{
+const SideBar = ({peopleInProximity,queryingAddress,setQueryingAddress}:{
+        peopleInProximity:Array<PeopleInProximityInterFace>;
+        queryingAddress:string,
+        setQueryingAddress:Function
+    })=>{
     return( 
     <MapContainer>
-        <SearchBar setQueryingCoardinates={setQueryingCoardinates}/>
-        {queryingCooardinates.latitude&&
-            <AddressDisplay>provided location: {queryingCooardinates.latitude},London UK</AddressDisplay>
+        <ProvideAdress setQueryingAddress={setQueryingAddress} />
+
+        {queryingAddress.length&&
+            <AddressDisplay>provided location: {queryingAddress}</AddressDisplay>
         }
+
         {
          peopleInProximity.length>0&&
             <UsersDisplay peopleInProximity={peopleInProximity}/>
