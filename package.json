@@ -1,6 +1,9 @@
 {
   "name": "find-location",
   "version": "1.0.0",
+  "engines": {
+    "npm": "7.19.0"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
