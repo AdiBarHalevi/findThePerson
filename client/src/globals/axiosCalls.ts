@@ -7,7 +7,18 @@ const axiosInstance = axios.create({
         ? `https://find-the-person.herokuapp.com/`
         : `http://localhost:8000/`,
   });
-  
+
+export const directQueryTest = async(adress:string)=>{
+    try{
+        const url = `/query/findPeopleNearMe/${adress}`
+        const ans = await axiosInstance.get(url)
+        return ans.data
+
+    }catch(e){
+        return []
+    }
+
+}
 
 export const queryForPeopleInProximity = async (latitude:number|null,longitude:number|null)=>{
     try{
