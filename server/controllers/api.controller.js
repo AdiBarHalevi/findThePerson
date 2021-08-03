@@ -39,5 +39,14 @@ const convertLocationAndDiscoverNearByUsers = async (address) => {
   };
   
   
+const findPeopleByGeoLocation = async (longitude,latitude) => {
+    try {
+      return await findPeopleInProximity(longitude,latitude)
+    } catch (e) {
+      return {error:e}
+    }
+  };
+  
+  
 
-  module.exports = {convertLocationAndDiscoverNearByUsers };
+  module.exports = {convertLocationAndDiscoverNearByUsers,findPeopleByGeoLocation};
