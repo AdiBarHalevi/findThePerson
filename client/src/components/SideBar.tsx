@@ -4,15 +4,14 @@ import { PeopleInProximityInterFace } from "../Types"
 import SearchBar from "./SearchBar"
 import UsersDisplay from "./UsersDisplay"
 
-
        
-const SideBar = ({peopleInProximity,setQueryingAddress,queryingAddress}:
-    {peopleInProximity:Array<PeopleInProximityInterFace>;setQueryingAddress:Function;queryingAddress:string})=>{
+const SideBar = ({peopleInProximity,setQueryingCoardinates,queryingCooardinates}:
+    {peopleInProximity:Array<PeopleInProximityInterFace>;setQueryingCoardinates:Function;queryingCooardinates:{latitude:number|null,longitude:number|null}})=>{
     return( 
     <MapContainer>
-        <SearchBar setAdress={setQueryingAddress}/>
-        {queryingAddress.length>0&&
-            <AddressDisplay>provided location: {queryingAddress},London UK</AddressDisplay>
+        <SearchBar setQueryingCoardinates={setQueryingCoardinates}/>
+        {queryingCooardinates.latitude&&
+            <AddressDisplay>provided location: {queryingCooardinates.latitude},London UK</AddressDisplay>
         }
         {
          peopleInProximity.length>0&&

@@ -2,14 +2,14 @@ import { useState } from "react"
 import styled from "styled-components"
 
 
-const SearchBar = ({setAdress}:{setAdress:Function})=>{
-    const [streetInput, setStreetInput] = useState('')
-    const [numberInput, setNumberInput] = useState(0)
+const SearchBar = ({setQueryingCoardinates}:{setQueryingCoardinates:Function})=>{
+    const [lng, setLng] = useState(0)
+    const [lat, setLat] = useState(0)
 
     const handleSubmit=(event:React.FormEvent)=>{
         event.preventDefault()
-        const adressString = `${streetInput} ${numberInput}`
-        setAdress(adressString)
+
+        setQueryingCoardinates({latitude:lng,longitude:lat})
     }
 
     return( 
@@ -17,11 +17,11 @@ const SearchBar = ({setAdress}:{setAdress:Function})=>{
         <Form onSubmit={handleSubmit}>
             <FlexBox >
                 <label>street Name</label>
-                <input type="text" value={streetInput} onChange={(e:any)=>setStreetInput(e.target.value)} required/>
+                <input type="number" value={lng} onChange={(e:any)=>setLng(e.target.value)} required/>
             </FlexBox>
             <FlexBox>
                 <label>street number</label>
-                <Input width="40px" type="number" value={numberInput} onChange={(e:any)=>setNumberInput(e.target.value)} required/>
+                <Input width="40px" type="number" value={lat} onChange={(e:any)=>setLat(e.target.value)} required/>
             </FlexBox>
             <Submit type="submit"/>
         </Form>

@@ -16,28 +16,54 @@ const parseProximityData = (peopleArr:any)=>{
     return parsedArr
 }
 
+
 const LocationAPI =()=>{
     const [queryingAddress,setQueryingAddress] = useState('')
     const [peopleInProximity,setPeopleInProximity] = useState<Array<PeopleInProximityInterFace>|[]>([])
     const [queryingCooardinates,setQueryingCoardinates] = useState<{latitude:number|null,longitude:number|null}>({latitude:null,longitude:null})
 
+ 
+    
     useEffect(()=>{
-        const testForHeroku =async()=>{
-            let peopleArr = await directQueryTest(queryingAddress)
-            if(peopleArr.length) {
+        const compareWithGeoLocation = async(lat:string,lng:string)=>{
+            //@ts-ignore
+            let peopleArr = await queryForPeopleInProximity(lat,lng);
+            if(peopleArr.length>0){
                 peopleArr = parseProximityData(peopleArr)
                 setPeopleInProximity(peopleArr)
+
             }
+            console.log(peopleArr)
+
+
         }
-        testForHeroku()
-        // const getCoordinates = async ()=>{
-        //     const coordinatesObj = await fetchQueryingUserGeoLocation(queryingAddress) as any
-        //     setQueryingCoardinates(coordinatesObj)
-        // }
-        // if(queryingAddress.length>0){
-        //    getCoordinates()
-        // }
-    },[queryingAddress])
+        const {latitude,longitude} = queryingCooardinates
+       if(latitude&&longitude){
+        let lat = `${latitude}`
+        let lng = `${longitude}`
+        compareWithGeoLocation(lat,lng)
+
+       }
+    },[queryingCooardinates])
+
+
+    // useEffect(()=>{
+    //     const testForHeroku =async()=>{
+    //         let peopleArr = await directQueryTest(queryingAddress)
+    //         if(peopleArr.length) {
+    //             peopleArr = parseProximityData(peopleArr)
+    //             setPeopleInProximity(peopleArr)
+    //         }
+    //     }
+    //     testForHeroku()
+    //     // const getCoordinates = async ()=>{
+    //     //     const coordinatesObj = await fetchQueryingUserGeoLocation(queryingAddress) as any
+    //     //     setQueryingCoardinates(coordinatesObj)
+    //     // }
+    //     // if(queryingAddress.length>0){
+    //     //    getCoordinates()
+    //     // }
+    // },[queryingAddress])
 
     // useEffect(()=>{
     //     const fecthPeopleInProximity = async (queryingCooardinates:{latitude:number|null,longitude:number|null})=>{
@@ -58,8 +84,8 @@ const LocationAPI =()=>{
     <>
         <SideBar 
         peopleInProximity={peopleInProximity}
-        setQueryingAddress={setQueryingAddress}
-        queryingAddress={queryingAddress}
+        setQueryingCoardinates={setQueryingCoardinates}
+        queryingCooardinates={queryingCooardinates}
         />
         <Map
          peopleInProximity={peopleInProximity}
