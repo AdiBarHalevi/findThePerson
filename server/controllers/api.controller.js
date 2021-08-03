@@ -10,7 +10,7 @@ const findPeopleInProximity =async(longitude,latitude)=>{
     
       return ans 
   }catch(e){
-    return {error:"error while comparing locations"}
+    return {error:e}
   }
 }
 
