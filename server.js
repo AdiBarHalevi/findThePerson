@@ -13,11 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-// app.use((req,res,next)=>{
-//   res.status(503).send("service is currently unavailable we'll be back shortly")
-// })
-
-app.use("/", PagesRoutes);
+app.use("/query", PagesRoutes);
 
 if (process.env.NODE_ENV === "production") {
   // Exprees will serve up production assets

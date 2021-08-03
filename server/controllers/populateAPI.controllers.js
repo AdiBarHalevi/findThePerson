@@ -1,21 +1,11 @@
 const axios = require("axios");
 const { UserModel } = require("../models/user.model");
-const ApiKey = process.env.SERVER_GEOLOCATION_API_KEY;
 const fs = require("fs");
 
 // saved my personal googleAPI key on my local machine
 const googleApiKey = ''
 
-const fecthLocation = async (adress) => {
-  const Url = `http://api.positionstack.com/v1/forward?access_key=${ApiKey}&query=${adress},London,UK`;
-  try {
-    const ans = await axios.get(Url);
-    return ans.data;
-  } catch (e) {
-    console.log("error", e);
-    return e;
-  }
-};
+
 
 const turnToDataArr = (content) => {
   const dataArr = [];
@@ -38,27 +28,29 @@ const turnToDataArr = (content) => {
 };
 
 const populateDB = async () => {
+  
   const keyWords = [
     "street","court","hill","building","lane","place","avenue","road",
     "gate","str","tample","strand","yard","bridge","square","path","drive","crescent",
     "passage","row","way","buildings","station","Holborn","studio"
   ];
+  
     //data.csv was deleted from the Repo as requested
   let content = fs.readFileSync("./data.csv", "utf8");
+  
   content = content.split("\n");
 
   const dataArr = turnToDataArr(content);
-
   try {
     for (let personArr of dataArr) {
-      let [name, adress] = personArr;
-      adress = `${adress},London,UK`
-      let locationIDAns = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${adress}&inputtype=textquery&key=${googleApiKey}`)
+      let [name, address] = personArr;
+      address = `${address},London,UK`
+      let locationIDAns = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${address}&inputtype=textquery&key=${googleApiKey}`)
       if(!locationIDAns.data.candidates.length){
-          let fixedAddress = adress;
+          let fixedAddress = address;
           for(let keyWord of keyWords){
               const reg = new RegExp(keyWord,"i")
-              const match  = adress.match(reg)
+              const match  = address.match(reg)
               if(match) {
                   const toArr = match.input.split(" ")
                   const indexOfmatch = toArr.indexOf(match[0])
@@ -66,16 +58,16 @@ const populateDB = async () => {
                     fixedAddress = toArr.slice(indexOfmatch-2,indexOfmatch+1);
                   }
                   if(toArr[indexOfmatch]===0){
-                    fixedAddress = toArr.slice(0,1);
+                    fixedAddress = toArr.slice(0,2);
                 }else{
                     fixedAddress = toArr.slice(indexOfmatch-1,indexOfmatch+1);
                   }
                   fixedAddress.join()
-                  adress = `${fixedAddress},London,UK`
+                  address = `${fixedAddress},London,UK`
 
               }
           }
-          locationIDAns = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${adress}&inputtype=textquery&key=${googleApiKey}`)
+          locationIDAns = await axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${address}&inputtype=textquery&key=${googleApiKey}`)
 
       }
       const locationID = locationIDAns.data.candidates[0].place_id;
@@ -83,19 +75,27 @@ const populateDB = async () => {
       const {result} = LocationData.data
 
       const user =await new UserModel({
+        location:{
+          geometry :{
+            type: "Point",
+            coordinates:[result.geometry.location.lng,result.geometry.location.lat]
+          },
+          properties:{
             userName:name,
-            adress:result.formatted_address,
-            latitude:result.geometry.location.lat,
-            longitude:result.geometry.location.lng,
+            address:result.formatted_address,
             locationID
+          }
+        }
          })
         await user.save()
-       }
+         console.log(user)
+      }
+
        return "DB successfully populated";
   } catch (e) {
-    return {e:"an error occurred while populating the DB"};
+    return {"an error occurred while populating the DB":e};
   }
 
 };
 
-module.exports = { fecthLocation,populateDB, };
+module.exports = {populateDB};
