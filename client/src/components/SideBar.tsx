@@ -62,7 +62,7 @@ const FlexBox = styled.div`
 `;
 const BookMark = styled.div`
   height: 100%;
-  width: 3vw;
+  width:40px;
   cursor: pointer;
   display: flex;
   justify-content: center;
