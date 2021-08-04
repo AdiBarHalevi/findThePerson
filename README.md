@@ -4,7 +4,7 @@ fint the person
 this Project is a full stack project with Node.js on the backend and React-app on the front end.
 
 In this project i had to parse a give dataset that was provided as a CSV file, in order to do so,
-i've used a script that you can find in: database-migrations>csv.exports.js
+i've used a script that you can find in: database-migrations>csv-exports.js
 
 in order to fecth geo location i used the google API (its not on the repo, as wel as the CSV is not on the repo)
 
