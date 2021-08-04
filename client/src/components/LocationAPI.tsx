@@ -79,6 +79,7 @@ const LocationAPI = () => {
         queryingAddress={queryingAddress}
         setQueryingAddress={setQueryingAddress}
         setAmountOfUsers={setAmountOfUsers}
+        queryingCooardinates={queryingCooardinates}
       />
       <Map
         peopleInProximity={peopleInProximity}

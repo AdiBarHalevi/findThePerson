@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { PeopleInProximityInterFace } from "../Types";
+import { Geolocation, PeopleInProximityInterFace } from "../Types";
 import ProvideAddress from "./ProvideAddress";
 import UsersDisplay from "./UsersDisplay";
 import Arrow from "../assets/arrow.png";
@@ -11,11 +11,13 @@ const SideBar = ({
   queryingAddress,
   setQueryingAddress,
   setAmountOfUsers,
+  queryingCooardinates
 }: {
   peopleInProximity: Array<PeopleInProximityInterFace>;
   queryingAddress: string;
   setQueryingAddress: Function;
   setAmountOfUsers: Function;
+  queryingCooardinates: Geolocation
 }) => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const handleClick = () => setIsSideBarOpen(!isSideBarOpen);
@@ -37,7 +39,7 @@ const SideBar = ({
           )}
 
           {peopleInProximity.length > 0 && (
-            <UsersDisplay peopleInProximity={peopleInProximity} />
+            <UsersDisplay queryingCooardinates={queryingCooardinates} peopleInProximity={peopleInProximity} />
           )}
         </FlexBox>
       )}

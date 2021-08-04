@@ -1,10 +1,13 @@
 import styled from "styled-components";
-import { PeopleInProximityInterFace } from "../Types";
+import { Geolocation, PeopleInProximityInterFace } from "../Types";
+import { calculateDistance } from "./mapComponents/MapUtils";
 
 const UsersDisplay = ({
   peopleInProximity,
+  queryingCooardinates
 }: {
   peopleInProximity: Array<PeopleInProximityInterFace> | [];
+  queryingCooardinates: Geolocation
 }) => {
   return (
     <Wrapper>
@@ -17,6 +20,11 @@ const UsersDisplay = ({
                   <NumberTd>{index + 1}</NumberTd>
                   <Td>{person.userName}</Td>
                   <Td>{person.address}</Td>
+                  {person.latitude && person.longitude&&queryingCooardinates.latitude&& queryingCooardinates.longitude&&
+                   <Td>
+                    distance: { calculateDistance(person.latitude,person.longitude,queryingCooardinates.latitude,queryingCooardinates.longitude)} Km
+
+                  </Td>}
                 </TR>
               );
             }
