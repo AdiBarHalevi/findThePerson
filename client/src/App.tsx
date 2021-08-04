@@ -16,10 +16,10 @@ function App() {
 export default App;
 
 const WelcomeContainer = styled.div`
-  height:100vh;
-  width:100vw;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items:center;
+  align-items: center;
 `;
 
 const GlobalStyle = createGlobalStyle`

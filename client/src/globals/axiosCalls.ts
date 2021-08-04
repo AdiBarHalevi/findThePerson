@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 export const queryForPeopleInProximity = async (
   latitude: string,
   longitude: string,
-  amountOfUsers:Number,
+  amountOfUsers: Number
 ) => {
   try {
     const url = `/users/proximity?longitude=${longitude}&latitude=${latitude}&limit=${amountOfUsers}`;
@@ -26,7 +26,7 @@ export const fetchQueryingUserGeoLocation = async (queryingAddress: string) => {
   const url = `https://us1.locationiq.com/v1/search.php?key=${ApiKey}&q=${queryingAddress}&bounded=1&limit=1&countrycodes=GB&namedetails=1&format=json
     `;
   try {
-    return await axios.get(url); 
+    return await axios.get(url);
   } catch (e) {
     return [];
   }

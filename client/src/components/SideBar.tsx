@@ -3,10 +3,8 @@ import styled from "styled-components";
 import { PeopleInProximityInterFace } from "../Types";
 import ProvideAddress from "./ProvideAddress";
 import UsersDisplay from "./UsersDisplay";
-import Arrow from "../assets/arrow.png"
-import ArrowRight from "../assets/arrowRight.png"
-
-
+import Arrow from "../assets/arrow.png";
+import ArrowRight from "../assets/arrowRight.png";
 
 const SideBar = ({
   peopleInProximity,
@@ -17,43 +15,35 @@ const SideBar = ({
   peopleInProximity: Array<PeopleInProximityInterFace>;
   queryingAddress: string;
   setQueryingAddress: Function;
-  setAmountOfUsers:Function;
+  setAmountOfUsers: Function;
 }) => {
-  const [isSideBarOpen,setIsSideBarOpen]=useState(true)
-  const handleClick=()=>setIsSideBarOpen(!isSideBarOpen)
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  const handleClick = () => setIsSideBarOpen(!isSideBarOpen);
 
-  
   return (
     <SideBarContainer>
-      {isSideBarOpen&&
+      {isSideBarOpen && (
         <FlexBox>
           <ProvideAddress
-          setQueryingAddress={setQueryingAddress}
-          setAmountOfUsers={setAmountOfUsers}
-          
+            setQueryingAddress={setQueryingAddress}
+            setAmountOfUsers={setAmountOfUsers}
           />
 
-          {queryingAddress.length>0 && (
-          <>
-            <AddressDisplayLabel>provided location: </AddressDisplayLabel>
-            <AddressDisplayValue>{queryingAddress}</AddressDisplayValue>
-          </>
+          {queryingAddress.length > 0 && (
+            <>
+              <AddressDisplayLabel>provided location: </AddressDisplayLabel>
+              <AddressDisplayValue>{queryingAddress}</AddressDisplayValue>
+            </>
           )}
 
           {peopleInProximity.length > 0 && (
             <UsersDisplay peopleInProximity={peopleInProximity} />
           )}
-
         </FlexBox>
-      }
+      )}
       <BookMark onClick={handleClick}>
-     
-      <ArrowButton arrow={isSideBarOpen?Arrow:ArrowRight}/>:
-  
-        
-
+        <ArrowButton arrow={isSideBarOpen ? Arrow : ArrowRight} />:
       </BookMark>
-
     </SideBarContainer>
   );
 };
@@ -61,30 +51,27 @@ const SideBar = ({
 export default SideBar;
 
 const FlexBox = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  justify-content:center;
-  align-items:center;
-  height:99vh;
-  width:35vw;
-
+  justify-content: center;
+  align-items: center;
+  height: 99vh;
+  width: 35vw;
 `;
 const BookMark = styled.div`
-  height:100%;
+  height: 100%;
   width: 3vw;
-  cursor:pointer;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const ArrowButton = styled(`div`)<{arrow:string}>`
-    background:${(props)=>`url(${props.arrow}) center center/cover`};
-    height:50px;
-    width:50px;
-`
-
+const ArrowButton = styled(`div`)<{ arrow: string }>`
+  background: ${(props) => `url(${props.arrow}) center center/cover`};
+  height: 50px;
+  width: 50px;
+`;
 
 const SideBarContainer = styled.div`
   display: flex;
@@ -98,7 +85,7 @@ const SideBarContainer = styled.div`
 const AddressDisplayLabel = styled.h2`
   text-align: center;
   font-size: 1rem;
-  font-weight: normal
+  font-weight: normal;
 `;
 
 const AddressDisplayValue = styled.h1`

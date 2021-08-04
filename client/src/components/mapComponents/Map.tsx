@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { getMarker } from "./MapMarker";
 import markerRed from "../../assets/markerRed.svg";
 import markerBlue from "../../assets/markerBlue.svg";
-
+import { calculateDistance } from "./MapUtils";
 
 const Map = ({
   peopleInProximity,
@@ -49,8 +49,17 @@ const Map = ({
                     lng: location.longitude,
                   }}>
                     <PopUpText>
-                      {location.userName}<br/>
-                      {location.address}
+                      user name:{location.userName}<br/>
+                      address: {location.address}<br/>
+                      latitude: {location.latitude}<br/>
+                      longitude: {location.longitude} <br/> 
+                      { queryingCooardinates.longitude&&queryingCooardinates.latitude&&
+                      <>
+                        distance: { calculateDistance(location.latitude,location.longitude,queryingCooardinates.latitude,queryingCooardinates.longitude)} Km
+                      </>
+                      }
+                     
+
                     </PopUpText>
                   </Popup>
                 </Marker>

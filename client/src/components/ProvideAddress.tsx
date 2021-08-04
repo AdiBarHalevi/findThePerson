@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const ProvideAddress = ({
   setQueryingAddress,
-  setAmountOfUsers
+  setAmountOfUsers,
 }: {
   setQueryingAddress: Function;
-  setAmountOfUsers:Function;
+  setAmountOfUsers: Function;
 }) => {
   const [address, setAddress] = useState("");
   const [StreetNumber, setStreetNumber] = useState(1);
@@ -16,42 +16,48 @@ const ProvideAddress = ({
     event.preventDefault();
     const queryingAddress = `${address},${StreetNumber} London,UK`;
     setQueryingAddress(queryingAddress);
-    setAmountOfUsers(wantedUserCount)
+    setAmountOfUsers(wantedUserCount);
   };
 
   return (
     <MapContainer>
       <Form onSubmit={handleSubmit}>
         <FlexBox>
-        <FlexBox>
-          <Label>Street Name</Label>
-          <Input
-            type="text"
-            value={address}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
-            required
-          />
-        </FlexBox>
-        <FlexBox>
-          <Label>Street Number</Label>
-          <Input
-            type="number"
-            value={StreetNumber}
-            min="1"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStreetNumber(Number(e.target.value))}
-            required
-          />
-        </FlexBox>
-        <FlexBox>
-          <Label>how many would you like to see?</Label>
+          <FlexBox>
+            <Label>Street Name</Label>
+            <Input
+              type="text"
+              value={address}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setAddress(e.target.value)
+              }
+              required
+            />
+          </FlexBox>
+          <FlexBox>
+            <Label>Street Number</Label>
+            <Input
+              type="number"
+              value={StreetNumber}
+              min="1"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setStreetNumber(Number(e.target.value))
+              }
+              required
+            />
+          </FlexBox>
+          <FlexBox>
+            <Label>how many would you like to see?</Label>
             <Input
               type="number"
               value={wantedUserCount}
               min="1"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWantedUserCount(Number(e.target.value))}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setWantedUserCount(Number(e.target.value))
+              }
               required
             />
-        </FlexBox>
+          </FlexBox>
         </FlexBox>
         <Submit type="submit" />
       </Form>
@@ -95,6 +101,6 @@ const Submit = styled.input`
 
 const Label = styled.label`
   margin: 15px 0 10px 0;
-  color: #000080 ;
-  text-align:center;
-`
+  color: #000080;
+  text-align: center;
+`;
