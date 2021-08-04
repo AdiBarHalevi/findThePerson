@@ -51,7 +51,6 @@ const LocationAPI = () => {
 
 
   useEffect(() => {
-    fetchQueryingUserGeoLocation(queryingAddress);
     const getCoordinates = async () => {
       const responseObj = (await fetchQueryingUserGeoLocation(
         queryingAddress
@@ -60,7 +59,7 @@ const LocationAPI = () => {
       const longitude = responseObj.data[0]?.lon;
       setQueryingCoardinates({latitude,longitude});
     };
-    if (queryingAddress.length) {
+    if (queryingAddress.length>2) {
       getCoordinates();
     }
   }, [queryingAddress]);

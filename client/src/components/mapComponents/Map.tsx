@@ -31,37 +31,48 @@ const Map = ({
         />
         {peopleInProximity.length > 0 &&
           peopleInProximity.map(
-            (location) =>
+            (location,i) =>
               location.latitude &&
               location.longitude && (
                 <Marker
+                  key={location.latitude}
                   icon={getMarker(markerBlue)}
                   position={{
                     lat: location.latitude,
                     lng: location.longitude,
                   }}
                 >
-                  <Popup position={{
+                  <Popup
+                   key={location.address}
+                   position={{
                     lat: location.latitude,
                     lng: location.longitude,
                   }}>
-                    {location.address}
+                    <PopUpText>
+                      {location.userName}<br/>
+                      {location.address}
+                    </PopUpText>
                   </Popup>
                 </Marker>
               )
           )}
         {queryingCooardinates.latitude && queryingCooardinates.longitude && (
           <Marker
+            key={queryingCooardinates.latitude}
             icon={getMarker(markerRed)}
             position={{
               lat: queryingCooardinates.latitude,
               lng: queryingCooardinates.longitude,
             }}
-          ><Popup  position={{
+          ><Popup
+            key={queryingCooardinates.longitude}
+            position={{
             lat: queryingCooardinates.latitude,
             lng: queryingCooardinates.longitude,
           }}>
-{queryingAddress}
+            <PopUpText>
+                {queryingAddress}
+            </PopUpText>
           </Popup></Marker>
         )}
       </MapContainer>
@@ -76,3 +87,9 @@ const MapPageContainer = styled.div`
   height: 100%;
   display: flex;
 `;
+
+const PopUpText = styled.p`
+  font-size:1.2rem;
+  text-align:center;
+
+`
