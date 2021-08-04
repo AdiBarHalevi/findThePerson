@@ -28,7 +28,7 @@ const ProvideAddress = ({
           <Input
             type="text"
             value={address}
-            onChange={(e: any) => setAddress(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
             required
           />
         </FlexBox>
@@ -38,7 +38,7 @@ const ProvideAddress = ({
             type="number"
             value={StreetNumber}
             min="1"
-            onChange={(e: any) => setStreetNumber(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStreetNumber(Number(e.target.value))}
             required
           />
         </FlexBox>
@@ -48,7 +48,7 @@ const ProvideAddress = ({
               type="number"
               value={wantedUserCount}
               min="1"
-              onChange={(e: any) => setWantedUserCount(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWantedUserCount(Number(e.target.value))}
               required
             />
         </FlexBox>

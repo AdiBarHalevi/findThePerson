@@ -4,12 +4,12 @@ import {
   fetchQueryingUserGeoLocation,
   queryForPeopleInProximity,
 } from "../globals/axiosCalls";
-import { Geolocation, PeopleInProximityInterFace } from "../Types";
+import { Geolocation, LocationIQAPIResponse, PeopleInProximityInterFace, personInProximityInterFace } from "../Types";
 import Map from "./mapComponents/Map";
 import SideBar from "./SideBar";
 
-const parseProximityData = (peopleArr: any) => {
-  const parsedArr = peopleArr.map((person: any) => {
+const parseProximityData = (peopleArr: Array<personInProximityInterFace>) => {
+  const parsedArr = peopleArr.map((person: personInProximityInterFace) => {
     const [longitude, latitude] = person.location.geometry.coordinates;
     const { userName, address, locationID } = person.location.properties;
     return {
@@ -49,13 +49,16 @@ const LocationAPI = () => {
     }
   }, [queryingCooardinates,amountOfUsers]);
 
+
   useEffect(() => {
     fetchQueryingUserGeoLocation(queryingAddress);
     const getCoordinates = async () => {
-      const coordinatesObj = (await fetchQueryingUserGeoLocation(
+      const responseObj = (await fetchQueryingUserGeoLocation(
         queryingAddress
-      )) as any;
-      setQueryingCoardinates(coordinatesObj);
+      )) as {data:[LocationIQAPIResponse?]};
+      const latitude = responseObj.data[0]?.lat;
+      const longitude = responseObj.data[0]?.lon;
+      setQueryingCoardinates({latitude,longitude});
     };
     if (queryingAddress.length) {
       getCoordinates();

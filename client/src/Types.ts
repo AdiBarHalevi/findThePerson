@@ -22,3 +22,17 @@ export interface PeopleInProximityInterFace extends Geolocation {
   googleLocationID: string;
   userName: String;
 }
+
+export interface LocationIQAPIResponse{
+    place_id:String;
+    licence:String;
+    osm_type:String;
+    osm_id:String;
+    boundingbox:Array<String>;
+    lat:number;
+    lon:number;
+    display_name:String;
+    class:String;
+    type:String;
+    importance:number;
+}
