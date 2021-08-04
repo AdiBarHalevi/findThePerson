@@ -1,6 +1,6 @@
 const { UserDBModel } = require("../models/user-db-model");
 
-const findPeopleInProximity = async (longitude, latitude,amountOfUsers) => {
+const findPeopleInProximity = async (longitude, latitude,limit) => {
   try {
     return await UserDBModel.find({
       "location.geometry.coordinates": {
@@ -8,9 +8,9 @@ const findPeopleInProximity = async (longitude, latitude,amountOfUsers) => {
           $geometry: { type: "Point", coordinates: [longitude, latitude] },
         },
       },
-    }).limit(Number(amountOfUsers));
+    }).limit(Number(limit));
   } catch (e) {
-    return { error: e };
+    return { error: 'Error while locating near users' };
   }
 };
 

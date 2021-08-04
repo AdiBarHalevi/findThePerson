@@ -5,7 +5,7 @@ const fs = require("fs");
 // saved my personal googleAPI key on my local machine
 const googleApiKey = "";
 
-const commonWordsInEnglishStreets = [
+const keyWordsinStreetNames = [
   "street",
   "court",
   "hill",
@@ -92,7 +92,7 @@ const exportCSVToDB = async (fileName) => {
       );
       if (!locationIDAns.data.candidates.length) {
         let fixedAddress = address;
-        for (let keyWord of commonWordsInEnglishStreets) {
+        for (let keyWord of keyWordsinStreetNames) {
           const reg = new RegExp(keyWord, "i");
           const match = address.match(reg);
           if (match) {

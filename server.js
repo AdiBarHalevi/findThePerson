@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const path = require("path");
-const PagesRoutes = require("./server/routes/pagesRoutes");
+const UsersRoutes = require("./server/routes/users-routes");
 
 require("dotenv").config();
 require("./server/db/mongoose");
@@ -13,14 +13,12 @@ const port = 8000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
-// TODO change to the name
-app.use("/query", PagesRoutes);
+
+app.use("/users", UsersRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  // Exprees will serve up production assets
   app.use(express.static("client/build"));
 
-  // Express serve up index.html file if it doesn't recognize route
   const path = require("path");
   app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));

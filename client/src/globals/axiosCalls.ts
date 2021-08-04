@@ -14,7 +14,7 @@ export const queryForPeopleInProximity = async (
   amountOfUsers:Number,
 ) => {
   try {
-    const url = `/query/find-people-by-geo-location/${longitude}/${latitude}/${amountOfUsers}`;
+    const url = `/users/proximity?longitude=${longitude}&latitude=${latitude}&limit=${amountOfUsers}`;
     const ans = await axiosInstance.get(url);
     return ans.data;
   } catch (e) {
