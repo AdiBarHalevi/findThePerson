@@ -3,7 +3,7 @@ const { UserDBModel } = require("../models/user-db-model");
 const fs = require("fs");
 
 // saved my personal googleAPI key on my local machine
-const googleApiKey = "";
+const googleApiKey = proces.env.GOOGLE_API_KEY;
 
 const keyWordsinStreetNames = [
   "street",
